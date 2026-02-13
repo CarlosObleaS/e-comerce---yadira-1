@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  # El contenedor de la Base de Datos
+  db:
+    image: postgres:15
+    container_name: moss_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: moss_store
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  # Herramienta visual para ver la base de datos (Adminer)
+  adminer:
+    image: adminer
+    container_name: moss_visualizer
+    restart: always
+    ports:
+      - "8081:8080"
+
+volumes:
+  db_data:
